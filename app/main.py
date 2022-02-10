@@ -23,109 +23,83 @@ def checkFiles():
 def mainMenu():
     while True:
         masthead(True)
-        # Selection menu
-        print "[P] Personal project"
-        print "[W] Work project"
-        print "[E] Exit\r"
-        project.nature = raw_input("\n>>> Select an option: ").lower()
-        if project.nature == "p":
-            project.file = "data/personal.json"
-            project.message = "> PERSONAL FILE\n"
-        elif project.nature == "w":
-            project.file = "data/work.json"
-            project.message = "> WORK FILE\n"
-        elif project.nature == "e":
-            break
-        else:
-            continue
-        # Dumping JSON file into dictioanry
-        with open(project.file) as f:
-            project.dict = json.load(f)
-        projectsMenu()
-
-# Projects menu
-def projectsMenu():
-    while True:
-        masthead(True)
         projectsList()
         # Selection menu
-        print "[#] Work on # (project)"
-        print "[M] Manage projects"
-        print "[B] Back\r"
+        print "[N] New project"
+        print "[A] Archive"
+        print "[S] Stats"
+        print "[E] Exit\r"
+        selection = raw_input("\n>>> Select an option: ").lower()
+        try:
+            int(selection)
+        except ValueError:
+            if selection.lower() == "n":
+                newProjectMenu()
+            if selection.lower() == "a":
+                archiveMenu()
+            if selection.lower() == "s":
+                statsMenu()
+            if selection.lower() == "e":
+                break
+        else:
+            if int(selection) <= len(dictionary.projects):
+                if int(selection) <= 0:
+                    True
+                else:
+                    projectMenu()
+
+# Project menu
+def projectMenu():
+    while True:
+        masthead(True)
+        # Selection menu
+        print "PROJECT MENU"
         project.select = raw_input("\n>>> Select an option: ")
         try:
             int(project.select)
         except ValueError:
-            if project.select.lower() == "m":
-                manageMenu()
             if project.select.lower() == "b":
                 break
-        else:
-            if int(project.select) <= len(project.dict):
-                if int(project.select) <= 0:
-                    True
-                else:
-                    timerMenu()
 
-# Timer menu
-def timerMenu():
+# New project menu
+def newProjectMenu():
     while True:
         masthead(True)
-        print "> PROJECT NAME\n" # To-do: print real name
-        # Selection menu
-        print "[T] Timer"
-        print "[P] Pomodoro"
-        print "[M] Manual record"
-        print "[B] Back\r"
-        project.timer = raw_input("\n>>> Select an option: ").lower()
-        if project.timer == "t":
-            print "\nTiming",
-            dotdotdot(3)
-            print " Done."
-        elif project.timer == "p":
-            print "\nPomodoring",
-            dotdotdot(3)
-            print " Done."
-        elif project.timer == "m":
-            print "\nRecording",
-            dotdotdot(3)
-            print " Done."
-        elif project.timer == "b":
-            break
-        else:
-            continue
+        print "CREATE NEW PROJECT"
+        print "-" * 40
+        projectName = raw_input("\nProject name: ")
+        # Adding project to file
+        createProject(projectName)
+        # Showing that the project has been created
+        print "Creating project",
+        dotdotdot(5)
+        break
 
-# Manage menu
-def manageMenu():
+# Archive menu
+def archiveMenu():
     while True:
         masthead(True)
         # Selection menu
-        print "[C] Create project"
-        print "[R] Rename project"
-        print "[A] Archive project"
-        print "[U] Unarchive project"
-        print "[B] Back\r"
-        project.manage = raw_input("\n>>> Select an option: ").lower()
-        if project.manage == "c":
-            print "\nCreating",
-            dotdotdot(3)
-            print " Done."
-        elif project.manage == "r":
-            print "\nRenaming",
-            dotdotdot(3)
-            print " Done."
-        elif project.manage == "a":
-            print "\nArchiving",
-            dotdotdot(3)
-            print " Done."
-        elif project.manage == "u":
-            print "\nUnarchiving",
-            dotdotdot(3)
-            print " Done."
-        elif project.manage == "b":
-            break
-        else:
-            continue
+        print "ARCHIVE MENU"
+        project.select = raw_input("\n>>> Select an option: ")
+        try:
+            int(project.select)
+        except ValueError:
+            if project.select.lower() == "b":
+                break
+
+# Stats menu
+def statsMenu():
+    while True:
+        masthead(True)
+        # Selection menu
+        print "PROJECT MENU"
+        project.select = raw_input("\n>>> Select an option: ")
+        try:
+            int(project.select)
+        except ValueError:
+            if project.select.lower() == "b":
+                break
 
 # Closes session
 def closeSession():
