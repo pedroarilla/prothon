@@ -11,20 +11,13 @@ from app.classes import *
 def checkFiles():
     if not os.path.exists("data"):
         os.makedirs("data")
-        json_default = "{\"1\": {\"name\": \"Miscellaneous\", \"time\": 0}}"
-        with open(os.path.join("data", "personal.json"), "wb") as temp_file:
-            temp_file.write(json_default)
-        with open(os.path.join("data", "work.json"), "wb") as temp_file:
-            temp_file.write(json_default)
+        json_default = "{}"
         with open(os.path.join("data", "archive.json"), "wb") as temp_file:
-            temp_file.write("{}")
-    if not os.path.exists("logs"):
-        os.makedirs("logs")
-        os.makedirs("logs/projects")
-        os.makedirs("logs/sessions")
-    # To-do: Check if legacy file structure
-    # To-do: Create TMP file
-    # To-do: Check if corrupted TMP file
+            temp_file.write(json_default)
+        with open(os.path.join("data", "projects.json"), "wb") as temp_file:
+            temp_file.write(json_default)
+        with open(os.path.join("data", "stats.json"), "wb") as temp_file:
+            temp_file.write(json_default)
 
 # Pomothon's core
 def mainMenu():
