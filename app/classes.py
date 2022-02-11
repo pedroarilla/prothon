@@ -3,7 +3,7 @@
 
 # Classes
 class app:
-    version = " v3.00 " # released 2022/03/01
+    version = " v1.00 " # released 2022/03/01
 
 class emoji:
     bye = "\U0001F44B"

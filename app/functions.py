@@ -11,9 +11,9 @@ from app.classes import *
 # Cleans the screen and prints app masthead
 def masthead(escape):
     os.system("cls" if os.name == "nt" else "clear")
-    pomothon = " POMOTHON" + colour.grey + app.version + colour.default
+    prothon = " PROTHON" + colour.grey + app.version + colour.default
     print "========================================"
-    print "|           " + pomothon + "           |"
+    print "|            " + prothon  + "           |"
     print "========================================"
     if escape:
         print "\r"

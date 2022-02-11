@@ -19,7 +19,7 @@ def checkFiles():
         with open(os.path.join("data", "stats.json"), "wb") as temp_file:
             temp_file.write(json_default)
 
-# Pomothon's core
+# Prothon's core
 def mainMenu():
     while True:
         masthead(True)
