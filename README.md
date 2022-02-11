@@ -1,12 +1,12 @@
 # ABOUT
 
-Pomothon is a CLI project manager and time tracker written in Python by [Pedro Arilla](http://pedroarilla.com). Pomothon helps you to record your project sessions and stores the data in JSON files. Every project is divided into tasks. It is possible to create, update and archive projects. To track your tasks, Pomothon offers a Pomodoro timer, a regular timer or manual records.
+Prothon is a CLI project manager and time tracker written in Python by [Pedro Arilla](http://pedroarilla.com). Prothon helps you to record your project progress and stores the data in JSON files. Every project is divided into tasks. It is possible to create, update and archive projects. To track your tasks, Prothon offers a timer or manual records.
 
-**Note:** Originally, this was a simple app to run a Pomodoro timer. My needs evolved and the name doesn’t make sense anymore -- but it was kind of funny (pomodoro + python = pomothon). Anyway, the [Pomodoro technique](https://francescocirillo.com/pages/pomodoro-technique) is a time management method developed by Francesco Cirillo in the late 1980s.
+**Note:** Prothon is an evolution of Pomothon, my other CLI project manager and time tracker with Pomodoro timer and focused on recording session logs.
 
 # HOW TO USE
 
-Run with `./pomothon.py` on your terminal.
+Run with `./prothon.py` on your terminal.
 
 # License
 
