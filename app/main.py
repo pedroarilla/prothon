@@ -23,7 +23,7 @@ def checkFiles():
 def mainMenu():
     while True:
         masthead(True)
-        projectsList()
+        projectsList(True)
         # Selection menu
         print "[N] New project"
         print "[A] Archive"
@@ -42,23 +42,23 @@ def mainMenu():
             if selection.lower() == "e":
                 break
         else:
-            if int(selection) <= len(dictionary.projects):
+            if int(selection) <= len(dictionary.projects) and dictionary.projects[selection]["active"] == "True":
                 if int(selection) <= 0:
                     True
                 else:
-                    projectMenu()
+                    projectMenu(selection)
 
 # Project menu
-def projectMenu():
+def projectMenu(project):
     while True:
         masthead(True)
         # Selection menu
         print "PROJECT MENU"
-        project.select = raw_input("\n>>> Select an option: ")
+        selection = raw_input("\n>>> Select an option: ")
         try:
-            int(project.select)
+            int(selection)
         except ValueError:
-            if project.select.lower() == "b":
+            if selection.lower() == "b":
                 break
 
 # New project menu
@@ -79,13 +79,41 @@ def newProjectMenu():
 def archiveMenu():
     while True:
         masthead(True)
+        print "ARCHIVE"
+        print "-" * 40
+        projectsList(False)
         # Selection menu
-        print "ARCHIVE MENU"
-        project.select = raw_input("\n>>> Select an option: ")
+        print "[B] Back\r"
+        selection = raw_input("\n>>> Select an option: ")
         try:
-            int(project.select)
+            int(selection)
         except ValueError:
-            if project.select.lower() == "b":
+            if selection.lower() == "b":
+                break
+        else:
+            if int(selection) <= len(dictionary.projects) and dictionary.projects[selection]["active"] == "False":
+                if int(selection) <= 0:
+                    True
+                else:
+                    unarchiveMenu(selection)
+
+# Unarchive menu
+def unarchiveMenu(project):
+    while True:
+        masthead(True)
+        # Selection menu
+        print "PROJECT: " + dictionary.projects[project]["name"]
+        print "-" * 40
+        # Show stats
+        print "stats.............\r"
+        # Selection menu
+        print "[U] Unarchive"
+        print "[B] Back\r"
+        selection = raw_input("\n>>> Select an option: ")
+        try:
+            int(selection)
+        except ValueError:
+            if selection.lower() == "b":
                 break
 
 # Stats menu
@@ -94,11 +122,11 @@ def statsMenu():
         masthead(True)
         # Selection menu
         print "PROJECT MENU"
-        project.select = raw_input("\n>>> Select an option: ")
+        selection = raw_input("\n>>> Select an option: ")
         try:
-            int(project.select)
+            int(selection)
         except ValueError:
-            if project.select.lower() == "b":
+            if selection.lower() == "b":
                 break
 
 # Closes session

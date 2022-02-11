@@ -28,7 +28,7 @@ def dotdotdot(x):
         time.sleep(.3)
 
 # Prints projects list
-def projectsList():
+def projectsList(active):
     # Dumping JSON file into dictionary
     with open("data/projects.json") as f:
         dictionary.projects = json.load(f)
@@ -44,10 +44,12 @@ def projectsList():
             s = int(dictionary.projects[str(i)]["time"])
             m, s = divmod(s, 60)
             h, m = divmod(m, 60)
-            print "{:2}{:2}{:02d}:{:02d}{:2}{:20}".format(i, "", h, m, "", dictionary.projects[str(i)]["name"])
+            # This if is to determine if we want to show active or archived projects
+            if active and dictionary.projects[str(i)]["active"] == "True" or not active and dictionary.projects[str(i)]["active"] == "False":
+                print "{:2}{:2}{:02d}:{:02d}{:2}{:20}".format(i, "", h, m, "", dictionary.projects[str(i)]["name"])
             i += 1
-        print "\a"
         # Since there are 1 project or more, showing here the menu option to select a project
+        print "\a"
         print "\r[#] Select project nº #"
 
 # Creates a new project
