@@ -54,7 +54,7 @@ def projectsList(active):
 
 # Creates a new project
 def createProject(projectName):
-    project = [len(dictionary.projects)+1, projectName, 0, True]
-    dictionary.projects[str(project[0])] = {"name": project[1], "time": str(project[2]), "active": str(project[3])}
+    project = [len(dictionary.projects)+1, projectName, 0, True, {}]
+    dictionary.projects[str(project[0])] = {"name": project[1], "time": str(project[2]), "active": str(project[3]), "tasks": project[4]}
     with open("data/projects.json", "w") as f:
         json.dump(dictionary.projects, f)

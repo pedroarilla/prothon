@@ -12,11 +12,7 @@ def checkFiles():
     if not os.path.exists("data"):
         os.makedirs("data")
         json_default = "{}"
-        with open(os.path.join("data", "archive.json"), "wb") as temp_file:
-            temp_file.write(json_default)
         with open(os.path.join("data", "projects.json"), "wb") as temp_file:
-            temp_file.write(json_default)
-        with open(os.path.join("data", "stats.json"), "wb") as temp_file:
             temp_file.write(json_default)
 
 # Prothon's core
@@ -121,7 +117,7 @@ def statsMenu():
     while True:
         masthead(True)
         # Selection menu
-        print "PROJECT MENU"
+        print "STATS MENU"
         selection = raw_input("\n>>> Select an option: ")
         try:
             int(selection)
