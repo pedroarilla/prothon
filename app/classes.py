@@ -14,6 +14,7 @@ class colour:
 
 class dictionary:
     projects = {}
+    tasks = {}
 
 class list:
     projects = []

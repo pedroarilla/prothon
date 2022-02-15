@@ -52,12 +52,39 @@ def projectMenu(project):
         # Selection menu
         print "PROJECT MENU: " + dictionary.projects[project]["name"]
         print "-" * 40
-        selection = raw_input("\n>>> Select an option: ")
+        tasksList(project)
+        # Selection menu
+        print "[N] New task"
+        print "[A] Archive"
+        print "[S] Stats"
+        print "[B] Back\r"
+        selection = raw_input("\n>>> Select an option: ").lower()
         try:
             int(selection)
         except ValueError:
+            if selection.lower() == "n":
+                newTaskMenu()
+            if selection.lower() == "a":
+                archiveProject()
+            if selection.lower() == "s":
+                statsProjectMenu()
             if selection.lower() == "b":
                 break
+        else:
+            # Arreglar esto para que corresponda a las tasks
+            if int(selection) <= len(list.projects) and int(selection) > 0:
+                selection = str(list.projects[int(selection)-1])
+                if dictionary.projects[selection]["active"] == "True":
+                    taskMenu(selection)
+
+def newTaskMenu():
+    projectMenu()
+
+def archiveProject():
+    projectMenu()
+
+def statsProjectMenu():
+    projectMenu()
 
 # New project menu
 def newProjectMenu():
@@ -102,7 +129,7 @@ def unarchiveMenu(project):
         print "ARCHIVE PROJECT: " + dictionary.projects[project]["name"]
         print "-" * 40
         # Show stats
-        print "stats.............\r"
+        print "Stats.............\r"
         # Selection menu
         print "[U] Unarchive"
         print "[B] Back\r"
@@ -110,6 +137,13 @@ def unarchiveMenu(project):
         try:
             int(selection)
         except ValueError:
+            if selection.lower() == "u":
+                dictionary.projects[project]["active"] = "True"
+                with open("data/projects.json", "w") as f:
+                    json.dump(dictionary.projects, f)
+                print "Unarchiving project",
+                dotdotdot(5)
+                mainMenu()
             if selection.lower() == "b":
                 break
 
@@ -120,6 +154,10 @@ def statsMenu():
         # Selection menu
         print "STATS MENU"
         print "-" * 40
+        # Show stats
+        print "Stats.............\r"
+        # Selection menu
+        print "[B] Back\r"
         selection = raw_input("\n>>> Select an option: ")
         try:
             int(selection)
