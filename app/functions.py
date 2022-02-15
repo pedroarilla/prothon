@@ -39,14 +39,18 @@ def projectsList(active):
     else:
         print "{:4}{:7}{:20}".format(" #", "HH:MM", "Project")
         print "-" * 40
-        i = 1
+        i = 1 # iterative element in dictionary
+        j = 1 # index element for the list
+        list.projects = [] # reset list
         while i <= len(dictionary.projects):
             s = int(dictionary.projects[str(i)]["time"])
             m, s = divmod(s, 60)
             h, m = divmod(m, 60)
-            # This if is to determine if we want to show active or archived projects
+            # Do we want to show active or archived projects?
             if active and dictionary.projects[str(i)]["active"] == "True" or not active and dictionary.projects[str(i)]["active"] == "False":
-                print "{:2}{:2}{:02d}:{:02d}{:2}{:20}".format(i, "", h, m, "", dictionary.projects[str(i)]["name"])
+                print "{:2}{:2}{:02d}:{:02d}{:2}{:20}".format(j, "", h, m, "", dictionary.projects[str(i)]["name"])
+                list.projects.append(i)
+                j += 1
             i += 1
         # Since there are 1 project or more, showing here the menu option to select a project
         print "\a"

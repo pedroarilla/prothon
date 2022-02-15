@@ -13,4 +13,7 @@ class colour:
     default = "\033[m"
 
 class dictionary:
+    projects = {}
+
+class list:
     projects = []

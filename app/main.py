@@ -19,6 +19,8 @@ def checkFiles():
 def mainMenu():
     while True:
         masthead(True)
+        print "MAIN MENU"
+        print "-" * 40
         projectsList(True)
         # Selection menu
         print "[N] New project"
@@ -38,10 +40,9 @@ def mainMenu():
             if selection.lower() == "e":
                 break
         else:
-            if int(selection) <= len(dictionary.projects) and dictionary.projects[selection]["active"] == "True":
-                if int(selection) <= 0:
-                    True
-                else:
+            if int(selection) <= len(list.projects) and int(selection) > 0:
+                selection = str(list.projects[int(selection)-1])
+                if dictionary.projects[selection]["active"] == "True":
                     projectMenu(selection)
 
 # Project menu
@@ -49,7 +50,8 @@ def projectMenu(project):
     while True:
         masthead(True)
         # Selection menu
-        print "PROJECT MENU"
+        print "PROJECT MENU: " + dictionary.projects[project]["name"]
+        print "-" * 40
         selection = raw_input("\n>>> Select an option: ")
         try:
             int(selection)
@@ -87,10 +89,9 @@ def archiveMenu():
             if selection.lower() == "b":
                 break
         else:
-            if int(selection) <= len(dictionary.projects) and dictionary.projects[selection]["active"] == "False":
-                if int(selection) <= 0:
-                    True
-                else:
+            if int(selection) <= len(list.projects) and int(selection) > 0:
+                selection = str(list.projects[int(selection)-1])
+                if dictionary.projects[selection]["active"] == "False":
                     unarchiveMenu(selection)
 
 # Unarchive menu
@@ -98,7 +99,7 @@ def unarchiveMenu(project):
     while True:
         masthead(True)
         # Selection menu
-        print "PROJECT: " + dictionary.projects[project]["name"]
+        print "ARCHIVE PROJECT: " + dictionary.projects[project]["name"]
         print "-" * 40
         # Show stats
         print "stats.............\r"
@@ -118,6 +119,7 @@ def statsMenu():
         masthead(True)
         # Selection menu
         print "STATS MENU"
+        print "-" * 40
         selection = raw_input("\n>>> Select an option: ")
         try:
             int(selection)
