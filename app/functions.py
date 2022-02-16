@@ -9,16 +9,13 @@ import json
 from app.classes import *
 
 # Cleans the screen and prints app masthead
-def masthead(escape):
+def masthead():
     os.system("cls" if os.name == "nt" else "clear")
     prothon = " PROTHON" + colour.grey + app.version + colour.default
     print "========================================"
     print "|            " + prothon  + "           |"
     print "========================================"
-    if escape:
-        print "\r"
-    else:
-        print "\a"
+    print "\r"
 
 # Prints a simple dot animation (loading)
 def dotdotdot(x):
@@ -63,7 +60,7 @@ def projectsList(active):
         print "\r[#] Select project nº #"
 
 # Prints tasks list within a project
-def tasksList(project):
+def tasksList(project, active):
     # Dumping JSON file into dictionary
     with open("data/projects.json") as f:
         dictionary.projects = json.load(f)
@@ -76,27 +73,19 @@ def tasksList(project):
     else:
         print "{:4}{:7}{:20}".format(" #", "HH:MM", "Task")
         print "-" * 40
-        ##########################
-        i = 1 # iterative element in dictionary
-        j = 1 # index element for the list
-        list.projects = [] # reset list
-        while i <= len(dictionary.projects):
-            s = int(dictionary.projects[str(i)]["time"])
+        i = 1
+        while i <= len(dictionary.tasks):
+            s = int(dictionary.tasks[str(i)]["time"])
             m, s = divmod(s, 60)
             h, m = divmod(m, 60)
-            # Do we want to show active or archived projects?
-            if active and dictionary.projects[str(i)]["active"] == "True" or not active and dictionary.projects[str(i)]["active"] == "False":
-                print "{:2}{:2}{:02d}:{:02d}{:2}{:20}".format(j, "", h, m, "", dictionary.projects[str(i)]["name"])
-                list.projects.append(i)
-                j += 1
+            print "{:2}{:2}{:02d}:{:02d}{:2}{:20}".format(i, "", h, m, "", dictionary.tasks[str(i)]["name"])
             i += 1
-        # Since there are 1 project or more, showing here the menu option to select a project
+        # Since there are 1 task or more, showing here the menu option to select a task
+        print "-" * 40
+        timeS = int(dictionary.projects[project]["time"])
+        timeM, timeS = divmod(timeS, 60)
+        timeH, timeM = divmod(timeM, 60)
+        print "TOTAL TIME: " + str(timeH) + "h " + str(timeM) + "m"
         print "\a"
-        print "\r[#] Select task nº #"
-
-# Creates a new project
-def createProject(projectName):
-    project = [len(dictionary.projects)+1, projectName, 0, True, {}]
-    dictionary.projects[str(project[0])] = {"name": project[1], "time": str(project[2]), "active": str(project[3]), "tasks": project[4]}
-    with open("data/projects.json", "w") as f:
-        json.dump(dictionary.projects, f)
+        if active:
+            print "\r[#] Select task nº #"
