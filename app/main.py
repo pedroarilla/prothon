@@ -71,10 +71,11 @@ def projectMenu(project):
 
 # New project
 def newProject():
-    while True:
-        masthead()
-        print "CREATE NEW PROJECT"
-        print "-" * 40
+    masthead()
+    print "CREATE NEW PROJECT"
+    print "-" * 40
+    print emoji.help.decode("unicode-escape") + colour.grey + " Press Ctrl+C to go back" + colour.default
+    try:
         projectName = raw_input("\nProject name: ")
         # Adding project to file
         project = [len(dictionary.projects)+1, projectName, 0, True, {}]
@@ -85,6 +86,8 @@ def newProject():
         # Showing that the project has been created
         print "Creating project",
         dotdotdot(5)
+    except KeyboardInterrupt:
+        pass
 
 # Start task
 def startTask(project, task):
@@ -143,9 +146,11 @@ def startTimer(project, task):
             except ValueError:
                 if selection.lower() == "f":
                     updateTime(project, task, t)
+                    break
                 if selection.lower() == "a":
                     print "Ignoring",
                     dotdotdot(3)
+                    break
 
 # Introduce manual record
 def manualRecord(project, task):
@@ -171,10 +176,11 @@ def manualRecord(project, task):
 
 # New task menu
 def newTask(project):
-    while True:
-        masthead()
-        print "CREATE NEW TASK FOR: " + dictionary.projects[project]["name"]
-        print "-" * 40
+    masthead()
+    print "CREATE NEW TASK FOR: " + dictionary.projects[project]["name"]
+    print "-" * 40
+    print emoji.help.decode("unicode-escape") + colour.grey + " Press Ctrl+C to go back" + colour.default
+    try:
         taskName = raw_input("\nTask name: ")
         # Adding task to file
         task = [len(dictionary.tasks)+1, taskName, 0]
@@ -186,6 +192,8 @@ def newTask(project):
         # Showing that the task has been created
         print "Creating task",
         dotdotdot(5)
+    except KeyboardInterrupt:
+        pass
 
 # Archive menu
 def archiveMenu():
