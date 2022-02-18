@@ -106,8 +106,10 @@ def startTask(project, task):
         except ValueError:
             if selection.lower() == "s":
                 startTimer(project, task)
+                break
             if selection.lower() == "m":
                 manualRecord(project, task)
+                break
             if selection.lower() == "b":
                 break
 
