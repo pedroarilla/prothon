@@ -89,3 +89,19 @@ def tasksList(project, active):
         print "\a"
         if active:
             print "\r[#] Select task nº #"
+
+# Updates the task and project total times
+def updateTime(project, task, time):
+    oldTime = int(dictionary.tasks[task]["time"])
+    newTime = oldTime + time
+    dictionary.tasks[task]["time"] = str(newTime)
+    # Updating project
+    oldTime = int(dictionary.projects[project]["time"])
+    newTime = oldTime + time
+    dictionary.projects[project]["time"] = str(newTime)
+    # Dumping dictionary into JSON file
+    with open("data/projects.json", "w") as f:
+        json.dump(dictionary.projects, f)
+    # Showing that the task has been created
+    print "Updating task",
+    dotdotdot(5)

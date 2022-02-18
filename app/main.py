@@ -4,6 +4,7 @@
 # Import modules
 import os
 import json
+import time
 from app.functions import *
 from app.classes import *
 
@@ -47,7 +48,7 @@ def mainMenu():
 def projectMenu(project):
     while True:
         masthead()
-        print "PROJECT MENU: " + dictionary.projects[project]["name"]
+        print "PROJECT: " + dictionary.projects[project]["name"]
         print "-" * 40
         tasksList(project, True)
         # Selection menu
@@ -84,13 +85,12 @@ def newProject():
         # Showing that the project has been created
         print "Creating project",
         dotdotdot(5)
-        break
 
 # Start task
 def startTask(project, task):
     while True:
         masthead()
-        print "WORKING ON TASK:" + dictionary.tasks[task]["name"]
+        print "TASK:" + dictionary.tasks[task]["name"]
         print "Project: " + dictionary.projects[project]["name"]
         print "-" * 40
         # Selection menu
@@ -102,11 +102,50 @@ def startTask(project, task):
             int(selection)
         except ValueError:
             if selection.lower() == "s":
-                break
+                startTimer(project, task)
             if selection.lower() == "m":
                 manualRecord(project, task)
             if selection.lower() == "b":
                 break
+
+# Start timer
+def startTimer(project, task):
+    masthead()
+    print "WORKING ON: " + dictionary.tasks[task]["name"]
+    print "Project:" + dictionary.projects[project]["name"]
+    print "-" * 40
+    print emoji.help.decode("unicode-escape") + colour.grey + " Press Ctrl+C to stop" + colour.default
+    # Timer
+    t = 0
+    try:
+        while t >= 0:
+            # Timer
+            sys.stdout.write("\r")
+            mins, secs = divmod(t, 60)
+            timer = emoji.clock.decode("unicode-escape") + " Time spent: {:02d}:{:02d}".format(mins, secs)
+            sys.stdout.write(timer)
+            sys.stdout.flush()
+            time.sleep(1)
+            t += 1
+            result = True
+    # Time stop
+    except KeyboardInterrupt:
+        while True:
+            masthead()
+            print "WORKING ON: " + dictionary.tasks[task]["name"]
+            print "Project:" + dictionary.projects[project]["name"]
+            print "-" * 40
+            print emoji.help.decode("unicode-escape") + colour.grey + " Press Ctrl+C to stop" + colour.default
+            print timer
+            selection = raw_input("\n(F)inished or (A)borted? ").lower()
+            try:
+                int(selection)
+            except ValueError:
+                if selection.lower() == "f":
+                    updateTime(project, task, t)
+                if selection.lower() == "a":
+                    print "Ignoring",
+                    dotdotdot(3)
 
 # Introduce manual record
 def manualRecord(project, task):
@@ -126,22 +165,9 @@ def manualRecord(project, task):
                 True
             else:
                 break
-    # Adding task to file
+    # Updating times
     time = int(time) * 60
-    oldTime = int(dictionary.tasks[task]["time"])
-    newTime = oldTime + time
-    dictionary.tasks[task]["time"] = str(newTime)
-    # Updating project
-    oldTime = int(dictionary.projects[project]["time"])
-    newTime = oldTime + time
-    dictionary.projects[project]["time"] = str(newTime)
-    # Dumping dictionary into JSON file
-    with open("data/projects.json", "w") as f:
-        json.dump(dictionary.projects, f)
-    # Showing that the task has been created
-    print "Updating task",
-    dotdotdot(5)
-    projectMenu(project)
+    updateTime(project, task, time)
 
 # New task menu
 def newTask(project):
@@ -160,7 +186,6 @@ def newTask(project):
         # Showing that the task has been created
         print "Creating task",
         dotdotdot(5)
-        break
 
 # Archive menu
 def archiveMenu():
