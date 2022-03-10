@@ -93,8 +93,8 @@ def newProject():
 def startTask(project, task):
     while True:
         masthead()
-        print "TASK:" + dictionary.tasks[task]["name"]
-        print "Project: " + dictionary.projects[project]["name"]
+        print "PROJECT: " + dictionary.projects[project]["name"]
+        print "TASK: " + dictionary.tasks[task]["name"]
         print "-" * 40
         # Selection menu
         print "[S] Start timer"
@@ -116,8 +116,8 @@ def startTask(project, task):
 # Start timer
 def startTimer(project, task):
     masthead()
-    print "WORKING ON: " + dictionary.tasks[task]["name"]
-    print "Project:" + dictionary.projects[project]["name"]
+    print "PROJECT: " + dictionary.projects[project]["name"]
+    print "TASK: " + dictionary.tasks[task]["name"]
     print "-" * 40
     print emoji.help.decode("unicode-escape") + colour.grey + " Press Ctrl+C to stop" + colour.default
     # Timer
@@ -137,8 +137,8 @@ def startTimer(project, task):
     except KeyboardInterrupt:
         while True:
             masthead()
-            print "WORKING ON: " + dictionary.tasks[task]["name"]
-            print "Project:" + dictionary.projects[project]["name"]
+            print "PROJECT: " + dictionary.projects[project]["name"]
+            print "TASK: " + dictionary.tasks[task]["name"]
             print "-" * 40
             print emoji.help.decode("unicode-escape") + colour.grey + " Press Ctrl+C to stop" + colour.default
             print timer
@@ -157,8 +157,8 @@ def startTimer(project, task):
 # Introduce manual record
 def manualRecord(project, task):
     masthead()
-    print "ADD MANUAL RECORD TO: " + dictionary.tasks[task]["name"]
-    print "Project:" + dictionary.projects[project]["name"]
+    print "PROJECT: " + dictionary.projects[project]["name"]
+    print "TASK: " + dictionary.tasks[task]["name"]
     print "-" * 40
     # Getting time value
     while True:
@@ -179,7 +179,7 @@ def manualRecord(project, task):
 # New task menu
 def newTask(project):
     masthead()
-    print "CREATE NEW TASK FOR: " + dictionary.projects[project]["name"]
+    print "NEW TASK FOR: " + dictionary.projects[project]["name"]
     print "-" * 40
     print emoji.help.decode("unicode-escape") + colour.grey + " Press Ctrl+C to go back" + colour.default
     try:
